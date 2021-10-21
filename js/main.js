@@ -1,6 +1,7 @@
 // chiedre difficoltà 
 let cointainerEl = document.querySelector('.cointainer')
 let numBtnclick = 0
+let isFinita = false
 let difficoltaUser
 do{
     difficoltaUser = prompt ('Scegli la difficoltà da 1 a 3')
@@ -45,18 +46,27 @@ for (let i = 0 ; i < Math.sqrt(nCelle); i++) {
         //addEventListener
         if(nBomba.includes(numero)){
             divCell.addEventListener('click', function () {
-                this.style.backgroundColor = 'red'
-                alert('Hai perso')
+                if (!isFinita){
+                    this.style.backgroundColor = 'red'
+                     alert('Hai perso')
+                     isFinita = true
+                    
+                }  
         })
         }else {
             divCell.addEventListener('click', function () {
-                if( this.style.backgroundColor != 'lightblue'){
+                if (!isFinita){
+                    if( this.style.backgroundColor != 'lightblue'){
                     this.style.backgroundColor = 'lightblue'
                     numBtnclick = numBtnclick + 1
                     if (numBtnclick == nCelle - 16) {
                         alert('Hai vinto')
+                        isFinita = true
+                       
                     }
                 }
+                }
+                
             })
         }
 
