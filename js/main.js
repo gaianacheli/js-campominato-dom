@@ -1,5 +1,6 @@
 // chiedre difficoltà 
 let cointainerEl = document.querySelector('.cointainer')
+let numBtnclick = 0
 let difficoltaUser
 do{
     difficoltaUser = prompt ('Scegli la difficoltà da 1 a 3')
@@ -16,6 +17,17 @@ if (difficoltaUser == '1'){
     nCelle = 49
 }
 
+const nBomba = []
+while(nBomba.length<16){
+    //estraggo il numero random (con max ncell)
+    let nRandom = Math.floor((Math.random() * nCelle) + 1);
+    //se non c e gia tra le bombe lo aggiungo
+    if (!nBomba.includes(nRandom)) {
+        nBomba.push(nRandom)
+    }
+}
+console.log(nBomba)
+
 //genera griglia
 
 for (let i = 0 ; i < Math.sqrt(nCelle); i++) {
@@ -27,15 +39,30 @@ for (let i = 0 ; i < Math.sqrt(nCelle); i++) {
        //creo div cella 
        let divCell = document.createElement('div')
        divCell.className = 'celle'
-       divCell.innerHTML = i * Math.sqrt(nCelle) + y + 1
-       divRig.append(divCell)
-   
-     cointainerEl.append(divRig)
+       let numero = i * Math.sqrt(nCelle) + y + 1
+       divCell.innerHTML = numero
 
-     //addEventListener
-     divCell.addEventListener('click', function () {
-        this.style.backgroundColor = 'lightblue'
-     })
+        //addEventListener
+        if(nBomba.includes(numero)){
+            divCell.addEventListener('click', function () {
+                this.style.backgroundColor = 'red'
+                alert('Hai perso')
+        })
+        }else {
+            divCell.style.backgroundColor = 'green'
+            divCell.addEventListener('click', function () {
+                if( this.style.backgroundColor != 'lightblue'){
+                    this.style.backgroundColor = 'lightblue'
+                    numBtnclick = numBtnclick + 1
+                    if (numBtnclick == nCelle - 16) {
+                        alert('Hai vinto')
+                    }
+                }
+            })
+        }
+
+       divRig.append(divCell)
     }
- 
+    cointainerEl.append(divRig)
+
 }
