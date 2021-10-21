@@ -54,17 +54,17 @@ for (let i = 0 ; i < Math.sqrt(nCelle); i++) {
                 }  
         })
         }else {
-            divCell.addEventListener('click', function () {
+            divCell.addEventListener('click', function Removeclick() {
                 if (!isFinita){
-                    if( this.style.backgroundColor != 'lightblue'){
+                    //console.log('click');
                     this.style.backgroundColor = 'lightblue'
                     numBtnclick = numBtnclick + 1
                     if (numBtnclick == nCelle - 16) {
                         alert('Hai vinto')
-                        isFinita = true
-                       
+                        isFinita = true   
                     }
-                }
+                     divCell.removeEventListener("click", Removeclick);
+                    
                 }
                 
             })
