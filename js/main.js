@@ -49,7 +49,6 @@ for (let i = 0 ; i < Math.sqrt(nCelle); i++) {
                 alert('Hai perso')
         })
         }else {
-            divCell.style.backgroundColor = 'green'
             divCell.addEventListener('click', function () {
                 if( this.style.backgroundColor != 'lightblue'){
                     this.style.backgroundColor = 'lightblue'
